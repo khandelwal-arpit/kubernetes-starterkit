@@ -2,7 +2,7 @@
   <br>
   <a><img src="https://github.com/khandelwal-arpit/kubernetes-starterkit/blob/master/assets/img/logo.png" alt="Calculator" width="400"></a>
   <br>
-  Kubernetes Starter-Kit
+  Kubernetes Starterkit
   <br>
 </h1>
 
