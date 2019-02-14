@@ -1,0 +1,71 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: vuecalc-svc
+  name: vuecalc-svc
+  namespace: default
+spec:
+  ports:
+  - port: 2000
+    protocol: TCP
+    targetPort: 2000
+  selector:
+    run: vuecalc-svc
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: vuecalc-svc
+  name: vuecalc-svc
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: vuecalc-svc
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: vuecalc-svc
+    spec:
+      containers:
+      - image: vuecalc:latest
+        imagePullPolicy: Never
+        name: vuecalc-svc
+        ports:
+        - containerPort: 2000
+          protocol: TCP    
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 2000
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 2000
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1   
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30

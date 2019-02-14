@@ -1,0 +1,98 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: bootstorage-svc
+  name: bootstorage-svc
+  namespace: default
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    run: bootstorage-svc
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: bootstorage-svc
+  name: bootstorage-svc
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: bootstorage-svc
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: bootstorage-svc
+    spec:
+      containers:
+      - image: bootstorage:latest
+        imagePullPolicy: Never
+        name: bootstorage-svc
+        env:
+          - name: REDIS_HOST
+            valueFrom:
+              secretKeyRef:
+                name: bootstorage-env
+                key: redis_host
+          - name: REDIS_PORT
+            valueFrom:
+              secretKeyRef:
+                name: bootstorage-env
+                key: redis_port
+          - name: REDIS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: bootstorage-env
+                key: redis_password           
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /api/bootstorage/healthz
+            port: 5000
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /api/bootstorage/healthz
+            port: 5000
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1    
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bootstorage-env
+type: Opaque
+data:
+  redis_password: Y2FsY3VsYXRvcg==
+stringData:
+  redis_host: redis
+  redis_port: '6379'

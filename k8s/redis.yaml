@@ -1,0 +1,53 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: redis
+  name: redis
+  namespace: default
+spec:
+  ports:
+    - port: 6379
+      name: redis
+  clusterIP: None
+  selector:
+    app: redis
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    run: redis
+  name: redis  
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  serviceName: redis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:3.2-alpine
+          imagePullPolicy: IfNotPresent
+          args: ["--requirepass", "calculator", "--appendonly", "yes", "--save", "900", "1", "--save", "30", "2"]
+          ports:
+            - containerPort: 6379
+              name: redis
+          volumeMounts:
+            - name: redis-volume
+              mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: redis-volume
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 50Mi

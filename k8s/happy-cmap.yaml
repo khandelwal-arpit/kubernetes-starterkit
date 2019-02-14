@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: happy-config
+  namespace: default
+data:
+  log_level: DEBUG

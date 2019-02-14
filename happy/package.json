@@ -1,0 +1,19 @@
+{
+  "name": "happy",
+  "version": "1.0.0",
+  "description": "Hapi.js based microservice",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "hapi.js"
+  ],
+  "author": "Arpit Khandelwal",
+  "license": "MIT",
+  "dependencies": {
+    "hapi": "^17.8.1",
+    "request": "^2.88.0"
+  }
+}
