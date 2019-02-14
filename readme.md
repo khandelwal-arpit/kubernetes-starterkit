@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a><img src="https://github.com/arpitkhandelwal1984/kubernetes_1/blob/master/assets/img/logo.png" alt="Calculator" width="400"></a>
+  <a><img src="https://github.com/khandelwal-arpit/kubernetes-starterkit/tree/master/assets/img/logo.png" alt="Calculator" width="400"></a>
   <br>
   Kubernetes Starter-Kit
   <br>
@@ -69,7 +69,7 @@ Ambassador(provided by datawire.io) is an open source Kubernetes-Native API Gate
 ## Architecture ##
 The complete architecture of this implementation can be summarised as:
 
-![Calculator Microservices](https://github.com/arpitkhandelwal1984/kubernetes_1/blob/master/assets/img/calculator.jpg)
+![Calculator Microservices](https://github.com/khandelwal-arpit/kubernetes-starterkit/tree/master/assets/img/calculator.jpg)
 
 As we can see, Ambassador is acting as a single point of entry in the Kubernetes cluster, channeling all the incoming requests to appropriate services. The various microservices are deployed at the following addresses inside the cluster:
 
@@ -137,12 +137,12 @@ All the services are currently deployed under the _default_ namespace to keep th
 ## Services ##
 The different services created for this starter-kit are summarised in the following diagram:
 
-![Calculator Services](https://github.com/arpitkhandelwal1984/kubernetes_1/blob/master/assets/img/services.jpg)
+![Calculator Services](https://github.com/khandelwal-arpit/kubernetes-starterkit/tree/master/assets/img/services.jpg)
 
 ### Vuecalc ### 
 This is a vue-cli 3.0 based Vue.js application which renders the calculator UI as shown below:
 
-![Calculator UI](https://github.com/arpitkhandelwal1984/kubernetes_1/blob/master/assets/img/vuecalc.png)
+![Calculator UI](https://github.com/khandelwal-arpit/kubernetes-starterkit/tree/master/assets/img/vuecalc.png)
 
 The service is composed of 'home', 'calculator' and 'history' views. It uses Axios library to do all the API calls to the kubernetes cluster. It uses a sound architecture with separate components and services for different aspects of the interface. The 'history' view shows a list of recent operations done over the calculator application by fetching them from the 'Bootstorage' service located inside the cluster. The commands to build and run the service independently are specified in the concerned [readme.md](https://github.com/arpitkhandelwal1984/kubernetes_1/tree/master/vuecalc) file in the service's codebase.
 
@@ -400,35 +400,35 @@ Please follow this [link](https://kubernetes.io/docs/tasks/access-application-cl
 
 **Overview**
 
-![Overview](https://github.com/arpitkhandelwal1984/kubernetes_1/blob/master/assets/img/overview.png)
+![Overview](https://github.com/khandelwal-arpit/kubernetes-starterkit/tree/master/assets/img/overview.png)
 
 **Resources**
 
-![Resources](https://github.com/arpitkhandelwal1984/kubernetes_1/blob/master/assets/img/resources.png)
+![Resources](https://github.com/khandelwal-arpit/kubernetes-starterkit/tree/master/assets/img/resources.png)
 
 **Services**
 
-![Services](https://github.com/arpitkhandelwal1984/kubernetes_1/blob/master/assets/img/services.png)
+![Services](https://github.com/khandelwal-arpit/kubernetes-starterkit/tree/master/assets/img/services.png)
 
 **Deployments**
 
-![Deployments](https://github.com/arpitkhandelwal1984/kubernetes_1/blob/master/assets/img/deployments.png)
+![Deployments](https://github.com/khandelwal-arpit/kubernetes-starterkit/tree/master/assets/img/deployments.png)
 
 **Pods**
 
-![Pods](https://github.com/arpitkhandelwal1984/kubernetes_1/blob/master/assets/img/pods.png)
+![Pods](https://github.com/khandelwal-arpit/kubernetes-starterkit/tree/master/assets/img/pods.png)
 
 **StatefulSets**
 
-![StatefulSets](https://github.com/arpitkhandelwal1984/kubernetes_1/blob/master/assets/img/statefulsets.png)
+![StatefulSets](https://github.com/khandelwal-arpit/kubernetes-starterkit/tree/master/assets/img/statefulsets.png)
 
 **CronJobs**
 
-![CronJobs](https://github.com/arpitkhandelwal1984/kubernetes_1/blob/master/assets/img/cronjobs.png)
+![CronJobs](https://github.com/khandelwal-arpit/kubernetes-starterkit/tree/master/assets/img/cronjobs.png)
 
 **Config And Storage**
 
-![Config And Storage](https://github.com/arpitkhandelwal1984/kubernetes_1/blob/master/assets/img/config-storage.png)
+![Config And Storage](https://github.com/khandelwal-arpit/kubernetes-starterkit/tree/master/assets/img/config-storage.png)
 
 ## Build and Deploy ##
 There are some assumptions that we are making (before you can run the build and deploy command) like you have the following pre-installed on the node/environment where this cluster is being set up -
