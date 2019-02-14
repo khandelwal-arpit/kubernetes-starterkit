@@ -144,13 +144,13 @@ This is a vue-cli 3.0 based Vue.js application which renders the calculator UI a
 
 ![Calculator UI](https://github.com/khandelwal-arpit/kubernetes-starterkit/blob/master/assets/img/vuecalc.png)
 
-The service is composed of 'home', 'calculator' and 'history' views. It uses Axios library to do all the API calls to the kubernetes cluster. It uses a sound architecture with separate components and services for different aspects of the interface. The 'history' view shows a list of recent operations done over the calculator application by fetching them from the 'Bootstorage' service located inside the cluster. The commands to build and run the service independently are specified in the concerned [readme.md](https://github.com/arpitkhandelwal1984/kubernetes_1/tree/master/vuecalc) file in the service's codebase.
+The service is composed of 'home', 'calculator' and 'history' views. It uses Axios library to do all the API calls to the kubernetes cluster. It uses a sound architecture with separate components and services for different aspects of the interface. The 'history' view shows a list of recent operations done over the calculator application by fetching them from the 'Bootstorage' service located inside the cluster. The commands to build and run the service independently are specified in the concerned [readme.md](https://github.com/khandelwal-arpit/kubernetes-starterkit/blob/master/vuecalc/README.md) file in the service's codebase.
 
 ### Expressed ###
-It is an Express.js (v4.16.x) based web application serving basic APIs for addition and subtraction. It is a containerised service and deployed inside the cluster as a pod eligible to horizontally scale under extreme conditions. The _Vuecalc_ service calls the apis from this service when it has to do an add or subtract operation, once the operation is complete an async call is placed to the _Bootstorage_ service to store the last performed operation in the Redis data store. Build and run commands are shared in [readme.md](https://github.com/arpitkhandelwal1984/kubernetes_1/tree/master/expressed).
+It is an Express.js (v4.16.x) based web application serving basic APIs for addition and subtraction. It is a containerised service and deployed inside the cluster as a pod eligible to horizontally scale under extreme conditions. The _Vuecalc_ service calls the apis from this service when it has to do an add or subtract operation, once the operation is complete an async call is placed to the _Bootstorage_ service to store the last performed operation in the Redis data store. Build and run commands are shared in [readme.md](https://github.com/khandelwal-arpit/kubernetes-starterkit/blob/master/expressed/readme.md).
 
 ### Happy ###
-It is a Hapi.js (v17.8.x) based application having two basic APIs for multiplication and division. It is also a containerised service and similar to the _Expressed_ service, is deployed internally in the kubernetes cluster for serving the apis. It also places an async call to the 'Bootstorage' service to store the last executed operation on Redis. Build and run commands are shared in [readme.md](https://github.com/arpitkhandelwal1984/kubernetes_1/tree/master/happy).
+It is a Hapi.js (v17.8.x) based application having two basic APIs for multiplication and division. It is also a containerised service and similar to the _Expressed_ service, is deployed internally in the kubernetes cluster for serving the apis. It also places an async call to the 'Bootstorage' service to store the last executed operation on Redis. Build and run commands are shared in [readme.md](https://github.com/khandelwal-arpit/kubernetes-starterkit/blob/master/happy/readme.md).
 
 ### Bootstorage ###
 It is a Java (v1.8) and Spring Boot (v2.x) based microservice that has two primary purposes:
@@ -158,7 +158,7 @@ It is a Java (v1.8) and Spring Boot (v2.x) based microservice that has two prima
 1. Store executed operations inside Redis, and
 2. Return the list of operations stored in Redis sorted in the order of execution (last operation at top).
 
-Redis has been used in the cluster as a statefulset which has persistence enabled and uses persistent volume claim templates in the cluster to store the Redis dump files which allows the cluster to make sure Redis always retains the values in between cluster outages too. The Redis connection parameters are dynamically passed to the pod from the ENV variables which are provided to it using the config maps.
+Redis has been used in the cluster as a statefulset which has persistence enabled and uses persistent volume claim templates in the cluster to store the Redis dump files which allows the cluster to make sure Redis always retains the values in between cluster outages too. The Redis connection parameters are dynamically passed to the pod from the ENV variables which are provided to it using the config maps. Build and run commands are shared in [readme.md](https://github.com/khandelwal-arpit/kubernetes-starterkit/blob/master/bootstorage/readme.md).
 
 ## Kubernetes Components ##
 Following kubernetes components were used during the development of this starter kit:
